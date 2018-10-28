@@ -1,0 +1,47 @@
+<div class="container">      
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="form-group">
+            <label for="selectItem">List of Cities</label>
+            <select  class="form-control" id="selectItem" 
+                  ng-options="city as city.name for city in $ctrl.cityList track by city.id " 
+                  ng-model="$ctrl.selectedCity"
+                  ng-change ="$ctrl.getCityForecast($ctrl.selectedCity.id)">
+                <option value="">-- Select City --</option>
+            </select>
+          </div>      
+    </div>
+  </div>
+   
+
+<!-- Grid row -->
+<div class="row" ng-if="$ctrl.cityForecast != undefined">  
+    <div class="col-md-2 col-lg-2">     
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">  
+      <!--Panel-->
+      <div class="card">
+        <h3 class="card-header font-weight-bold text-white bg-dark">{{$ctrl.cityForecast.city.name}},{{$ctrl.cityForecast.city.country}}</h3>
+        <div class="card-body">
+          <h5 class="card-title">Forecast details : </h5>          
+          <div class="row list-group">
+            <div class="list-group-item"
+                ng-repeat ="weather in  $ctrl.cityForecast.list">               
+              <span class="col-xs-12 col-sm-12 col-md-12 col-lg-4"> Date : {{weather.dt_txt}} </span>
+              <span class="col-xs-12 col-sm-12 col-md-12 col-lg-4"> Temp Max : {{weather.main.temp_max}}  </span>
+              <span class="col-xs-12 col-sm-12 col-md-12 col-lg-4"> Temp Min : {{weather.main.temp_min}}</span>
+            </div>
+          </div>            
+        </div>
+      </div>
+      <!--/.Panel-->  
+    </div>
+    <div class="col-md-2 col-lg-2">     
+    </div>
+ 
+  </div>
+  <!-- Grid row -->  
+  
+ 
+</div>
